@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Button add = findViewById(R.id.start_stop);
+    final Button add = findViewById(R.id.start_stop);
     Button discard = findViewById(R.id.discard);
     Button clear = findViewById(R.id.button3);
     Button copy = findViewById(R.id.button);
@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
         if(started) {
           long service = System.currentTimeMillis() - start_time;
           textView.append(service+",\n");
+          add.setText("Start");
           started = false;
         } else {
           start_time = System.currentTimeMillis();
+          add.setText("Stop");
           started = true;
         }
       }
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         started = false;
+        add.setText("Start");
       }
     });
 
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         textView.setText("");
+        started = false;
+        add.setText("Start");
       }
     });
 
